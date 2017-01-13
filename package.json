@@ -1,0 +1,65 @@
+{
+  "name": "karma-tslint",
+  "version": "0.0.0-semantically-released",
+  "description": "Karma tslint plugin",
+  "main": "lib/index.js",
+  "typeings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "karma",
+    "karma-preprocessor",
+    "karma-tslint-preprocessor",
+    "karma-plugin",
+    "tslint"
+  ],
+  "scripts": {
+    "build": "tsc --project src",
+    "ci:before": "npm prune",
+    "ci:script": "run-s ready",
+    "ci:after": "run-s semantic-release",
+    "clean": "rimraf lib",
+    "commit": "git-cz",
+    "lint": "tslint src/**/*.ts",
+    "precommit": "run-s ready",
+    "ready": "run-s clean lint build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "watch": "npm run build -- --watch"
+  },
+  "author": {
+    "name": "Yisrael Eliav",
+    "email": "yisraelx@gmail.com",
+    "url": "https://github.com/yisraelx/karma-tslint"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/yisraelx/karma-tslint",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yisraelx/karma-tslint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yisraelx/karma-tslint/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "peerDependencies": {
+    "tslint": "^4.3.1"
+  },
+  "devDependencies": {
+    "@types/log4js": "0.0.32",
+    "commitizen": "^2.9.5",
+    "cz-conventional-changelog": "^1.2.0",
+    "husky": "^0.12.0",
+    "npm-run-all": "^4.0.0",
+    "rimraf": "^2.5.4",
+    "semantic-release": "^6.3.2",
+    "tslint": "^4.3.1",
+    "typescript": "^2.1.5"
+  }
+}
