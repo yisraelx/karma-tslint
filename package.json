@@ -22,9 +22,9 @@
     "ci:script": "run-s ready",
     "ci:after": "run-s semantic-release",
     "clean": "rimraf lib",
-    "commit": "git-cz",
+    "commit": "run-s ready && git-cz",
     "lint": "tslint src/**/*.ts",
-    "precommit": "run-s ready",
+    "prepush": "run-s ready",
     "ready": "run-s clean lint build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "watch": "npm run build -- --watch"
