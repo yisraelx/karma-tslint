@@ -11,13 +11,8 @@ module.exports = function (config) {
         },
 
         tslintPreprocessor: {
-            formatter: 'vso',
-            configuration: {
-                rules: {
-                    'no-var-keyword': true,
-                    'no-any': true
-                }
-            }
+            formatter: 'pmd',
+            configuration: './config/tslint-config.json'
         },
 
         logLevel: config.LOG_DEBUG,

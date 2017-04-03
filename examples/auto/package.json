@@ -1,12 +1,12 @@
 {
-  "name": "karma-tslint-example",
+  "name": "karma-tslint-auto-example",
   "version": "0.0.1",
   "scripts": {
     "test": "karma start"
   },
   "devDependencies": {
-    "karma": "^1.5.0",
-    "karma-tslint": "file:///D:\\applications\\karma-tslint",
-    "tslint": "^5.0.0"
+    "karma": "*",
+    "karma-tslint": "../../",
+    "tslint": "*"
   }
 }

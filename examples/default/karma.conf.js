@@ -11,8 +11,10 @@ module.exports = function (config) {
         },
 
         tslintPreprocessor: {
-            formatter: 'prose'
-        }
+            formatter: 'verbose',
+            configuration: 'default'
+        },
 
+        logLevel: config.LOG_DEBUG,
     })
 };
