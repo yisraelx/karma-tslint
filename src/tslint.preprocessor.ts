@@ -1,7 +1,17 @@
-import { Linter, LintResult, Configuration } from 'tslint';
+import { Linter, LintResult, Configuration, FormatterFunction } from 'tslint';
 import { Logger, Level } from 'log4js';
 
-export type TFormatter = 'prose' | 'json' | 'stylish' | 'verbose' | 'pmd' | 'msbuild' | 'checkstyle' | 'vso' | 'fileslist' | Function;
+export type TFormatter =
+    'prose'
+    | 'json'
+    | 'stylish'
+    | 'verbose'
+    | 'pmd'
+    | 'msbuild'
+    | 'checkstyle'
+    | 'vso'
+    | 'fileslist'
+    | FormatterFunction;
 
 export interface ITslintPreprocessorConfig {
     /**
@@ -23,7 +33,7 @@ export interface ITslintPreprocessorConfig {
     stopOnFailure?: boolean;
 }
 
-export function TslintPreprocessorFactory(loggerFactory: {create: (name: string, level?: string | Level) => Logger}, config: ITslintPreprocessorConfig = {} as any) {
+export function TslintPreprocessorFactory(loggerFactory: { create: (name: string, level?: string | Level) => Logger }, config: ITslintPreprocessorConfig = {} as any) {
     let logger: Logger = loggerFactory.create('preprocessor.tslint');
     return new TslintPreprocessor(logger, config).preprocessor;
 }
@@ -51,7 +61,7 @@ export class TslintPreprocessor extends Linter {
         let result: LintResult = this.getResultAndClean();
         let error = null;
 
-        if (result.failureCount) {
+        if (result.failures.length) {
             this._logger.error(result.output);
             if (stopOnFailure) error = result.output;
         }
@@ -66,13 +76,17 @@ export class TslintPreprocessor extends Linter {
             configuration = Linter.findConfigurationPath(null, filePath);
         }
 
-        this._logger.debug(`Using configuration: ${configuration}`);
+        this._logger.info(`Using Configuration: ${typeof configuration === 'string' ? configuration : 'karma-tslint config object'}`);
 
-        if (configuration === 'default') configuration = null;
+        if (configuration === 'default') configuration = 'tslint:recommended';
 
-        if (typeof configuration === 'string' || configuration === null) {
+        if (typeof configuration === 'string') {
             configuration = Configuration.loadConfigurationFromPath(configuration as any);
+        } else if (typeof configuration === 'object') {
+            configuration = Configuration.parseConfigFile(configuration);
         }
+
+        this._logger.debug(`Configuration Object:\n${JSON.stringify(configuration)}`);
 
         return configuration;
     }
