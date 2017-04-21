@@ -1,5 +1,6 @@
+import {ITslintPreprocessorConfig} from 'karma-tslint';
 
-module.exports = function (config) {
+export = function (config) {
     config.set({
 
         files: [
@@ -12,8 +13,8 @@ module.exports = function (config) {
 
         tslintPreprocessor: {
             formatter: 'prose'
-        },
+        } as ITslintPreprocessorConfig,
 
         logLevel: config.LOG_DEBUG
-    })
+    });
 };
