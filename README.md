@@ -53,6 +53,9 @@ __stopOnFailure:__
 * boolean - if karma should stop on tslint failure
 * undefined (default) - true
 
+## Examples
+You can see usage examples in the "[examples](https://github.com/yisraelx/karma-tslint/blob/master/examples)" folder in the source code.
+
 ## License
 Copyright © 2017 [Yisrael Eliav](https://github.com/yisraelx),
 Licensed under the [MIT license](https://github.com/yisraelx/karma-tslint/blob/master/LICENSE).
