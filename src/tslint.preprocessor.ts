@@ -78,7 +78,7 @@ export class TslintPreprocessor extends Linter {
             configuration = Linter.findConfigurationPath(null, filePath);
         }
 
-        this._logger.info(`Using Configuration: ${typeof configuration === 'string' ? configuration : 'karma-tslint config object'}`);
+        this._logger.debug(`Using Configuration: ${typeof configuration === 'string' ? configuration : 'karma-tslint config object'}`);
 
         if (configuration === 'default') configuration = 'tslint:recommended';
 
