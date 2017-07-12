@@ -46,7 +46,7 @@ __configuration:__
 * undefined (default) - search tslint.json file in the source file path.
 
 __formatter:__
-* TFormatter - 'prose' | 'json' | 'stylish' | 'verbose' | 'pmd' | 'msbuild' | 'checkstyle' | 'vso' | 'fileslist' | Function
+* TFormatter -     'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | FormatterConstructor;
 * undefined (default) - 'stylish'
 
 __stopOnFailure:__

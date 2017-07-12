@@ -1,17 +1,19 @@
-import { Linter, LintResult, Configuration, FormatterFunction } from 'tslint';
+import { Linter, LintResult, Configuration, FormatterConstructor } from 'tslint';
 import { Logger, Level } from 'log4js';
 
 export type TFormatter =
-    'prose'
+    'checkstyle'
+    | 'codeFrame'
+    | 'filesList'
     | 'json'
-    | 'stylish'
-    | 'verbose'
-    | 'pmd'
     | 'msbuild'
-    | 'checkstyle'
+    | 'pmd'
+    | 'prose'
+    | 'stylish'
+    | 'tap'
+    | 'verbose'
     | 'vso'
-    | 'fileslist'
-    | FormatterFunction;
+    | FormatterConstructor;
 
 export interface ITslintPreprocessorConfig {
     /**
@@ -22,7 +24,7 @@ export interface ITslintPreprocessorConfig {
      */
     configuration?: Configuration.IConfigurationFile | string | 'default';
     /**
-     * TFormatter - 'prose' | 'json' | 'stylish' | 'verbose' | 'pmd' | 'msbuild' | 'checkstyle' | 'vso' | 'fileslist' | Function
+     * TFormatter - 'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | FormatterConstructor;
      * undefined (default) - 'stylish'
      */
     formatter?: TFormatter;
@@ -81,9 +83,9 @@ export class TslintPreprocessor extends Linter {
         if (configuration === 'default') configuration = 'tslint:recommended';
 
         if (typeof configuration === 'string') {
-            configuration = Configuration.loadConfigurationFromPath(configuration as any);
+            configuration = Configuration.loadConfigurationFromPath(configuration as string);
         } else if (typeof configuration === 'object') {
-            configuration = Configuration.parseConfigFile(configuration);
+            configuration = Configuration.parseConfigFile(configuration as any);
         }
 
         this._logger.debug(`Configuration Object:\n${JSON.stringify(configuration)}`);
