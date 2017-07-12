@@ -22,8 +22,10 @@
     "ci:script": "run-s ready",
     "ci:after": "run-s semantic-release",
     "clean": "rimraf lib",
-    "commit": "run-s ready && git-cz",
+    "cm": "run-s ready && git-cz",
+    "commitmsg": "validate-commit-msg",
     "lint": "tslint src/**/*.ts",
+    "precommit": "run-s ready",
     "prepush": "run-s ready",
     "ready": "run-s clean lint build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
@@ -46,6 +48,9 @@
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "helpMessage": "Commit message violates the rules defined for this project. Please, execute `npm run cm` to generate a correct commit message with `commitizen`"
     }
   },
   "peerDependencies": {
@@ -60,6 +65,7 @@
     "rimraf": "^2.6.1",
     "semantic-release": "^6.3.6",
     "tslint": "^5.5.0",
-    "typescript": "^2.4.1"
+    "typescript": "^2.4.1",
+    "validate-commit-msg": "^2.12.2"
   }
 }
