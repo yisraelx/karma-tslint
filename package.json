@@ -18,18 +18,17 @@
   ],
   "scripts": {
     "build": "tsc --project src",
-    "ci:before": "npm prune",
-    "ci:script": "run-s ready",
-    "ci:after": "run-s semantic-release",
+    "ci:script": "yarn ready",
+    "ci:after": "yarn semantic-release",
     "clean": "rimraf lib",
-    "cm": "run-s ready && git-cz",
+    "cm": "yarn ready && git-cz",
     "commitmsg": "validate-commit-msg",
     "lint": "tslint src/**/*.ts",
-    "precommit": "run-s ready",
-    "prepush": "run-s ready",
+    "precommit": "yarn ready",
+    "prepush": "yarn ready",
     "ready": "run-s clean lint build",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "watch": "npm run build -- --watch"
+    "semantic-release": "semantic-release",
+    "watch": "yarn build --watch"
   },
   "author": {
     "name": "Yisrael Eliav",
@@ -57,16 +56,17 @@
     "tslint": "^5.5.0"
   },
   "devDependencies": {
-    "@types/log4js": "0.0.32",
-    "@types/node": "^6.0.81",
+    "@types/log4js": "2.3.5",
+    "@types/node": "^9.4.1",
     "commitizen": "^2.9.6",
-    "cz-conventional-changelog": "^2.0.0",
+    "cz-conventional-changelog": "^2.1.0",
     "husky": "^0.14.3",
-    "npm-run-all": "^4.0.2",
-    "rimraf": "^2.6.1",
-    "semantic-release": "^6.3.6",
-    "tslint": "^5.5.0",
-    "typescript": "^2.4.1",
-    "validate-commit-msg": "^2.12.2"
+    "npm-run-all": "^4.1.2",
+    "rimraf": "^2.6.2",
+    "semantic-release": "^12.4.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.1",
+    "validate-commit-msg": "^2.12.2",
+    "yarn": "^1.3.2"
   }
 }

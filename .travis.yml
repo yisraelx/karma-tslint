@@ -1,9 +1,9 @@
+sudo: false
 language: node_js
 node_js:
-  - '7'
-  - '6'
-  - '4'
+  - '8.9.4'
 cache:
+  yarn: true
   directories:
     - node_modules
 notifications:
@@ -13,10 +13,11 @@ branches:
     - master
   except:
     - /^v\d+\.\d+\.\d+$/
-before_script:
-  - npm run ci:before
-script:
-  - npm run ci:script
-after_success:
-  - npm run ci:after
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$PATH
 
+install: yarn install --frozen-lockfile
+
+script: yarn ci:script
+after_success: yarn ci:after
