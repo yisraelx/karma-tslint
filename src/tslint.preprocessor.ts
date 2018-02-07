@@ -1,5 +1,5 @@
-import { Linter, LintResult, Configuration, FormatterConstructor } from 'tslint';
-import { Logger, Level } from 'log4js';
+import {Linter, LintResult, Configuration, FormatterConstructor} from 'tslint';
+import {Logger, Level} from 'log4js';
 
 export type TFormatter =
     'checkstyle'
@@ -29,10 +29,25 @@ export interface ITslintPreprocessorConfig {
      */
     formatter?: TFormatter;
     /**
+     * string - formatters directory
+     * undefined (default) - 'node_modules/tslint/build/formatters'
+     */
+    formattersDirectory?: string;
+    /**
+     * string | string[] - rules directory
+     * undefined (default) - 'node_modules/tslint/lib/rules'
+     */
+    rulesDirectory?: string | string[];
+    /**
      * boolean - if karma should stop on tslint failure
      * undefined (default) - true
      */
     stopOnFailure?: boolean;
+    /**
+     * boolean - if tslint should be fix errors
+     * undefined (default) - false
+     */
+    fix?: boolean;
 }
 
 export function TslintPreprocessorFactory(loggerFactory: { create: (name: string, level?: string | Level) => Logger }, config: ITslintPreprocessorConfig = {} as any) {
@@ -49,7 +64,12 @@ export class TslintPreprocessor extends Linter {
     }
 
     constructor(private _logger: Logger, private _config: ITslintPreprocessorConfig) {
-        super({fix: false, formatter: _config.formatter || 'stylish'});
+        super({
+            fix: _config.fix || false,
+            formatter: _config.formatter || 'stylish',
+            formattersDirectory: _config.formattersDirectory,
+            rulesDirectory: _config.rulesDirectory
+        });
     }
 
     private _preprocessor(source: string, file: any, done: (err: any, source?: string) => void) {

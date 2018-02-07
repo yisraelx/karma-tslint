@@ -32,7 +32,10 @@ export = (config: any) => {
         tslintPreprocessor: {
             configuration: 'default',
             formatter: 'prose',
-            stopOnFailure: true
+            formattersDirectory: 'formatters-dir',
+            rulesDirectory: 'rules-dir',
+            stopOnFailure: true,
+            fix: true
         } as ITslintPreprocessorConfig
         
     });
@@ -49,9 +52,21 @@ __formatter:__
 * TFormatter -     'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | FormatterConstructor;
 * undefined (default) - 'stylish'
 
+__formattersDirectory__
+* string - formatters directory
+* undefined (default) - 'node_modules/tslint/build/formatters'
+
+__rulesDirectory__
+* string | string[] - rules directory
+* undefined (default) - 'node_modules/tslint/lib/rules'
+
 __stopOnFailure:__
 * boolean - if karma should stop on tslint failure
 * undefined (default) - true
+
+__fix__
+* boolean - if tslint should be fix errors
+* undefined (default) - false
 
 ## Examples
 You can see usage examples in the "[examples](https://github.com/yisraelx/karma-tslint/blob/master/examples)" folder in the source code.
