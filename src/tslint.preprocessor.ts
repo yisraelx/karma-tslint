@@ -6,6 +6,7 @@ export type TFormatter =
     | 'codeFrame'
     | 'filesList'
     | 'json'
+    | 'junit'
     | 'msbuild'
     | 'pmd'
     | 'prose'
@@ -13,6 +14,7 @@ export type TFormatter =
     | 'tap'
     | 'verbose'
     | 'vso'
+    | string
     | FormatterConstructor;
 
 export interface ITslintPreprocessorConfig {
@@ -24,7 +26,7 @@ export interface ITslintPreprocessorConfig {
      */
     configuration?: Configuration.IConfigurationFile | string | 'default';
     /**
-     * TFormatter - 'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | FormatterConstructor;
+     * TFormatter - 'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'junit' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | string | FormatterConstructor;
      * undefined (default) - 'stylish'
      */
     formatter?: TFormatter;

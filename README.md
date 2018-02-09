@@ -49,7 +49,7 @@ __configuration:__
 * undefined (default) - search tslint.json file in the source file path.
 
 __formatter:__
-* TFormatter -     'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | FormatterConstructor;
+* TFormatter - 'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'junit' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | string | FormatterConstructor;
 * undefined (default) - 'stylish'
 
 __formattersDirectory__
