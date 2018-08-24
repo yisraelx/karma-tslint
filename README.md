@@ -41,7 +41,7 @@ export = (config: any) => {
     });
 };
 ```
-#### ITslintPreprocessorConfig
+### ITslintPreprocessorConfig
 __configuration:__
 * tslint.Configuration.IConfigurationFile - object type tslint config file.
 * string - path of tslint.json file
@@ -67,6 +67,22 @@ __stopOnFailure:__
 __fix__
 * boolean - if tslint should be fix errors
 * undefined (default) - false
+
+### Karma plugins option
+In most cases, you do not have to explicitly declare `plugins` option in the karma config, Because by default, Karma loads all sibling NPM modules which have a name starting with karma-* ([karma docs](https://karma-runner.github.io/2.0/config/plugins.html)).
+But if necessary, add `'karma-tslint'` to the plugins list. 
+```typescript
+// karma.conf.ts
+export = (config: any) => {
+    config.set({
+        // ...
+        plugins: [
+            'karma-tslint',
+            // ...
+        ]
+    });
+};
+```
 
 ## Examples
 You can see usage examples in the "[examples](https://github.com/yisraelx/karma-tslint/blob/master/examples)" folder in the source code.
