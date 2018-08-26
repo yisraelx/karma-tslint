@@ -1,0 +1,14 @@
+{
+  "name": "karma-tslint-default-example",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "karma start"
+  },
+  "devDependencies": {
+    "karma": "*",
+    "karma-tslint": "../../../",
+    "ts-node": "*",
+    "tslint": "*",
+    "typescript": "*"
+  }
+}

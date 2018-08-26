@@ -1,13 +1,13 @@
 {
-  "name": "karma-tslint-default-example",
+  "name": "karma-tslint-path-example",
   "version": "0.0.1",
   "scripts": {
     "test": "karma start"
   },
   "devDependencies": {
     "karma": "*",
-    "karma-tslint": "../../",
-    "ts-node": "^*",
+    "karma-tslint": "../../../",
+    "ts-node": "*",
     "tslint": "*",
     "typescript": "*"
   }

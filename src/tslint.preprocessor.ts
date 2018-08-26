@@ -1,5 +1,8 @@
-import {Linter, LintResult, Configuration, FormatterConstructor} from 'tslint';
-import {Logger, Level} from 'log4js';
+import { Linter, LintResult, Configuration, FormatterConstructor } from 'tslint';
+import { Program } from 'typescript';
+import { Logger, Level } from 'log4js';
+import { lstatSync } from 'fs';
+import { join } from 'path';
 
 export type TFormatter =
     'checkstyle'
@@ -50,6 +53,13 @@ export interface ITslintPreprocessorConfig {
      * undefined (default) - false
      */
     fix?: boolean;
+    /**
+     * For rules that need `typescript` program
+     *
+     * string - path to the tsconfig.json file or to the directory containing the tsconfig.json file
+     * undefined (default) - run without `typescript` program
+     */
+    project?: string;
 }
 
 export function TslintPreprocessorFactory(loggerFactory: { create: (name: string, level?: string | Level) => Logger }, config: ITslintPreprocessorConfig = {} as any) {
@@ -61,17 +71,33 @@ export function TslintPreprocessorFactory(loggerFactory: { create: (name: string
 
 export class TslintPreprocessor extends Linter {
 
+    static tryCreateProgram(project?: string): Program {
+        if (typeof project === 'string') {
+            try {
+                if (lstatSync(project).isDirectory()) {
+                    project = join(project, 'tsconfig.json');
+                }
+
+                return TslintPreprocessor.createProgram(project);
+            } catch (e) {
+
+            }
+        }
+    }
+
     public get preprocessor() {
         return this._preprocessor.bind(this);
     }
 
     constructor(private _logger: Logger, private _config: ITslintPreprocessorConfig) {
         super({
-            fix: _config.fix || false,
-            formatter: _config.formatter || 'stylish',
-            formattersDirectory: _config.formattersDirectory,
-            rulesDirectory: _config.rulesDirectory
-        });
+                fix: _config.fix || false,
+                formatter: _config.formatter || 'stylish',
+                formattersDirectory: _config.formattersDirectory,
+                rulesDirectory: _config.rulesDirectory
+            },
+            TslintPreprocessor.tryCreateProgram(_config.project)
+        );
     }
 
     private _preprocessor(source: string, file: any, done: (err: any, source?: string) => void) {
@@ -120,4 +146,5 @@ export class TslintPreprocessor extends Linter {
         this['failures'] = [];
         return result;
     }
+
 }

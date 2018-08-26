@@ -68,6 +68,10 @@ __fix__
 * boolean - if tslint should be fix errors
 * undefined (default) - false
 
+__project__ - for rules that need `typescript` program
+* string - path to the tsconfig.json file or to the directory containing the tsconfig.json file
+* undefined (default) - run without `typescript` program
+
 ### Karma plugins option
 In most cases, you do not have to explicitly declare `plugins` option in the karma config, Because by default, Karma loads all sibling NPM modules which have a name starting with karma-* ([karma docs](https://karma-runner.github.io/2.0/config/plugins.html)).
 But if necessary, add `'karma-tslint'` to the plugins list. 
