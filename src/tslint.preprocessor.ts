@@ -112,7 +112,7 @@ export class TslintPreprocessor extends Linter {
         let error = null;
 
         if (result.failures.length) {
-            this._logger.error(result.output);
+            this._logger.error(`\n%s`, result.output);
             if (stopOnFailure) error = result.output;
         }
 
@@ -126,7 +126,7 @@ export class TslintPreprocessor extends Linter {
             configuration = Linter.findConfigurationPath(null, filePath);
         }
 
-        this._logger.debug(`Using Configuration: ${typeof configuration === 'string' ? configuration : 'karma-tslint config object'}`);
+        this._logger.debug(`Using Configuration: ${typeof configuration === 'string' ? configuration : 'config object'}`);
 
         if (configuration === 'default') configuration = 'tslint:recommended';
 
@@ -136,7 +136,7 @@ export class TslintPreprocessor extends Linter {
             configuration = Configuration.parseConfigFile(configuration as any);
         }
 
-        this._logger.debug(`Configuration Object:\n${JSON.stringify(configuration)}`);
+        this._logger.debug(`Configuration Object:\n${inspect(configuration, {colors: true})}\n`);
 
         return configuration;
     }
