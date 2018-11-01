@@ -3,6 +3,7 @@ import { Program } from 'typescript';
 import { Logger, Level } from 'log4js';
 import { lstatSync } from 'fs';
 import { join } from 'path';
+import { inspect } from 'util';
 
 export type TFormatter =
     'checkstyle'
@@ -23,11 +24,11 @@ export type TFormatter =
 export interface ITslintPreprocessorConfig {
     /**
      * tslint.Configuration.IConfigurationFile - object type tslint config file.
-     * string - path of tslint.json file
-     * 'default' - default tslint config
-     * undefined (default) - search tslint.json file in the source file path.
+     * string - path of tslint.json file or tslint preset 'tslint:{all,latest,recommended}'.
+     * 'default' - default tslint config (tslint:recommended). // @deprecated(use 'tslint:recommended' instead)
+     * undefined (default) - search 'tslint.json' file in the source file path.
      */
-    configuration?: Configuration.IConfigurationFile | string | 'default';
+    configuration?: Configuration.IConfigurationFile | string | 'tslint:all' | 'tslint:latest' | 'tslint:recommended' | 'default';
     /**
      * TFormatter - 'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'junit' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | string | FormatterConstructor;
      * undefined (default) - 'stylish'
@@ -128,7 +129,10 @@ export class TslintPreprocessor extends Linter {
 
         this._logger.debug(`Using Configuration: ${typeof configuration === 'string' ? configuration : 'config object'}`);
 
-        if (configuration === 'default') configuration = 'tslint:recommended';
+        if (configuration === 'default') {
+            this._logger.warn(`configuration 'default' is deprecated, use 'tslint:recommended' instead.`);
+            configuration = 'tslint:recommended';
+        }
 
         if (typeof configuration === 'string') {
             configuration = Configuration.loadConfigurationFromPath(configuration as string);

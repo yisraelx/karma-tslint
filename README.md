@@ -44,9 +44,9 @@ export = (config: any) => {
 ### ITslintPreprocessorConfig
 __configuration:__
 * tslint.Configuration.IConfigurationFile - object type tslint config file.
-* string - path of tslint.json file
-* 'default' - default tslint config
-* undefined (default) - search tslint.json file in the source file path.
+* string - path of 'tslint.json' file or tslint preset 'tslint:{all,latest,recommended}'.
+* 'default' - default tslint config. // @deprecated(use 'tslint:recommended' instead)
+* undefined (default) - auto search for 'tslint.json' file.
 
 __formatter:__
 * TFormatter - 'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'junit' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | string | FormatterConstructor;
