@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "@karma-tslint/examples",
+  "description": "Karma tslint examples",
+  "version": "0.0.0-PLACEHOLDER",
+  "workspaces": [
+    "configuration/*",
+    "project"
+  ],
+  "scripts": {
+    "postinstall": "yarn --cwd .. build"
+  }
+}

@@ -13,7 +13,7 @@ export = function (config) {
 
         tslintPreprocessor: {
             formatter: 'verbose',
-            configuration: 'default'
+            configuration: 'tslint:recommended'
         } as ITslintPreprocessorConfig,
 
         logLevel: config.LOG_DEBUG,
