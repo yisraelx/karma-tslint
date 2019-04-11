@@ -1,7 +1,7 @@
 {
   "name": "karma-tslint",
   "version": "0.0.0-development",
-  "description": "Karma tslint plugin",
+  "description": "Adapter for the Tslint, linter for the TypeScript language.",
   "main": "lib/index.js",
   "typeings": "lib/index.d.ts",
   "files": [

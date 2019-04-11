@@ -2,17 +2,25 @@
 [![Travis build](https://travis-ci.org/yisraelx/karma-tslint.svg?branch=master)](https://travis-ci.org/yisraelx/karma-tslint)
 [![Version](https://img.shields.io/npm/v/karma-tslint.svg)](https://www.npmjs.com/package/karma-tslint)
 [![MIT License](https://img.shields.io/npm/l/karma-tslint.svg)](https://github.com/yisraelx/karma-tslint/blob/master/LICENSE)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![TypeScript](https://img.shields.io/badge/100%25-TypeScript-blue.svg)](https://www.typescriptlang.org)
+[![Semantic Release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
+**Adapter for the [Tslint](https://palantir.github.io/tslint), linter for the [TypeScript](https://www.typescriptlang.org) language.**
+
+> _Warning: [Tslint](https://palantir.github.io/tslint) soon will be deprecated ([Roadmap: TSLint &rarr; ESLint](https://github.com/palantir/tslint/issues/4534)), 
+[karma-tslint](https://github.com/yisraelx/karma-tslint) will continue to be updated accordingly._
 
 ## Install
 ```bash
-$ npm install --save-dev karma-tslint
-# and install peer dependencies
-$ npm install --save-dev tslint
+$ yarn add karma-tslint tslint --dev
 ```
+Or
+```bash
+$ npm install karma-tslint tslint --save-dev
+```
+
 ## Use
-### Config
 
 ```typescript
 // karma.conf.ts
@@ -69,7 +77,7 @@ __fix__
 * undefined (default) - false
 
 __project__ - for rules that need `typescript` program
-* string - path to the tsconfig.json file or to the directory containing the tsconfig.json file
+* string - path to 'tsconfig.json' file or to the directory containing the 'tsconfig.json' file
 * undefined (default) - run without `typescript` program
 
 ### Karma plugins option

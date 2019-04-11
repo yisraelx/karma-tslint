@@ -57,7 +57,7 @@ export interface ITslintPreprocessorConfig {
     /**
      * For rules that need `typescript` program
      *
-     * string - path to the tsconfig.json file or to the directory containing the tsconfig.json file
+     * string - path to the 'tsconfig.json' file or to the directory containing the 'tsconfig.json' file
      * undefined (default) - run without `typescript` program
      */
     project?: string;
@@ -123,7 +123,7 @@ export class TslintPreprocessor extends Linter {
     private getConfiguration(filePath: string): Configuration.IConfigurationFile {
         let {configuration} = this._config as any;
 
-        if (configuration === void 0) {
+        if (configuration === void 0) { // auto search for 'tslint.json' file.
             configuration = Linter.findConfigurationPath(null, filePath);
         }
 
@@ -134,9 +134,9 @@ export class TslintPreprocessor extends Linter {
             configuration = 'tslint:recommended';
         }
 
-        if (typeof configuration === 'string') {
+        if (typeof configuration === 'string') { // path of tslint.json file or tslint preset 'tslint:{all,latest,recommended}'.
             configuration = Configuration.loadConfigurationFromPath(configuration as string);
-        } else if (typeof configuration === 'object') {
+        } else if (typeof configuration === 'object') { // tslint config object.
             configuration = Configuration.parseConfigFile(configuration as any);
         }
 
