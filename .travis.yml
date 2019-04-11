@@ -20,4 +20,10 @@ before_install:
 install: yarn install --frozen-lockfile
 
 script: yarn ci:script
-after_success: yarn ci:after
+
+jobs:
+  include:
+    - stage: release
+      node_js: lts/*
+      script:
+        - yarn ci:release
