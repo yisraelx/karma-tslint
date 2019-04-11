@@ -28,7 +28,7 @@ export interface ITslintPreprocessorConfig {
      * 'default' - default tslint config (tslint:recommended). // @deprecated(use 'tslint:recommended' instead)
      * undefined (default) - search 'tslint.json' file in the source file path.
      */
-    configuration?: Configuration.IConfigurationFile | string | 'tslint:all' | 'tslint:latest' | 'tslint:recommended' | 'default';
+    configuration?: Configuration.RawConfigFile | string | 'tslint:all' | 'tslint:latest' | 'tslint:recommended' | 'default';
     /**
      * TFormatter - 'checkstyle' | 'codeFrame' | 'filesList' | 'json' | 'junit' | 'msbuild' | 'pmd' | 'prose' | 'stylish' | 'tap' | 'verbose' | 'vso' | string | FormatterConstructor;
      * undefined (default) - 'stylish'
@@ -120,8 +120,8 @@ export class TslintPreprocessor extends Linter {
         done(error, source);
     }
 
-    private getConfiguration(filePath: string) {
-        let {configuration} = this._config;
+    private getConfiguration(filePath: string): Configuration.IConfigurationFile {
+        let {configuration} = this._config as any;
 
         if (configuration === void 0) {
             configuration = Linter.findConfigurationPath(null, filePath);
